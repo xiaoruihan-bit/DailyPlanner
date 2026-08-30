@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#5b5bd6">
+  <meta name="description" content="简洁、私密、支持语音输入的每日计划表">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <title>小日程 · 每日计划</title>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">✦</span><div><strong>小日程</strong><span>Daily focus</span></div></div>
+    <div class="top-actions"><button class="text-button" id="exportBtn">导出数据</button><label class="text-button file-label" for="importInput">导入数据<input id="importInput" type="file" accept="application/json"></label></div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div><p class="eyebrow">YOUR DAILY SPACE</p><h1>把今天，过得更有条理。</h1><p class="hero-copy">记录每一个小目标，完成时给自己一个清晰的反馈。</p></div>
+      <div class="date-picker-wrap"><label for="dateInput">正在规划</label><input id="dateInput" type="date"></div>
+    </section>
+
+    <div id="statusMessage" class="status" role="status" aria-live="polite"></div>
+    <div class="date-nav" aria-label="日期导航"><button class="icon-button" id="prevDay" aria-label="前一天">←</button><button class="today-button" id="todayBtn">回到今天</button><button class="icon-button" id="nextDay" aria-label="后一天">→</button><span id="prettyDate"></span></div>
+
+    <div class="content-grid">
+      <section class="card planner-card" aria-labelledby="planHeading">
+        <div class="card-heading"><div><p class="eyebrow">TODAY'S PLAN</p><h2 id="planHeading">今日计划</h2></div><span class="plan-count" id="planCount">0 项</span></div>
+        <form id="planForm" class="plan-form"><label class="sr-only" for="planInput">添加计划</label><textarea id="planInput" rows="2" maxlength="200" placeholder="写下今天想完成的一件事…（Enter 添加，Shift + Enter 换行）"></textarea><div class="form-actions"><button type="button" class="voice-button" id="voiceBtn"><span id="voiceIcon">●</span><span id="voiceLabel">语音输入</span></button><button class="primary-button" type="submit">添加计划 <span>↵</span></button></div></form>
+        <div id="planList" class="plan-list"></div>
+        <div id="emptyState" class="empty-state"><span class="empty-icon">☀</span><strong>从一个小目标开始</strong><p>例如「完成 20 分钟阅读」</p></div>
+      </section>
+
+      <aside class="side-column">
+        <section class="card progress-card" aria-labelledby="progressHeading"><div class="card-heading"><div><p class="eyebrow">PROGRESS</p><h2 id="progressHeading">今日进度</h2></div><strong class="progress-value" id="progressValue">0%</strong></div><div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="今日计划完成进度"><div id="progressBar"></div></div><div class="progress-meta"><span id="progressText">还没有计划</span><button class="link-button" id="toggleAllBtn">全部完成</button></div></section>
+        <section class="card summary-card" aria-labelledby="summaryHeading"><div class="card-heading"><div><p class="eyebrow">REFLECTION</p><h2 id="summaryHeading">每日小结</h2></div><span class="save-hint" id="saveHint">自动保存</span></div><textarea id="summaryInput" maxlength="1000" placeholder="今天有什么收获？明天想怎么继续？"></textarea><div class="summary-footer"><span id="summaryCount">0 / 1000</span><span>⌘ 本地保存</span></div></section>
+        <section class="tips"><span>✦</span><p><strong>给自己留一点余地</strong><br>完成计划不是为了追赶，而是为了看见自己的每一步。</p></section>
+      </aside>
+    </div>
+    <div class="danger-zone"><button class="link-button muted" id="clearDayBtn">清空当天记录</button></div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
